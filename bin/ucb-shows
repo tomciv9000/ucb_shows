@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 
+require './lib/ucb_shows'
+
 UCBShows::CLI.new.call
