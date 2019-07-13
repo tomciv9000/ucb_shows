@@ -17,3 +17,17 @@ How to Build a CLI Gem
   -user selects theater (1-4) or 'exit'
    -a list of that evening's shows are displayed
    -user selects a show (numbered) for more information or can type 'theaters' or 'exit'
+      - show information is displayed, user is able to select another show at that theater
+      
+What is a show?
+
+- a show has a name
+- a show has a time
+- a show has a ticket URL
+- a show has a description
+- a show has a price
+
+What is a theater?
+
+- a theater has a name
+- a theater has many shows
