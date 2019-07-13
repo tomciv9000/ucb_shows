@@ -34,7 +34,7 @@ class UCBShows::CLI
       when "theaters"
         list_theaters
       else
-        puts "Hmmm, not sure what you meant.  Try 'theaters' or 'exit'."
+        puts "WRONG! You can select a theater (1-4) or 'exit' to exit."
       end
     end
   end

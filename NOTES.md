@@ -13,5 +13,7 @@ How to Build a CLI Gem
 
 - A command line interface for shows at the UCB Theaters in NYC and LA
 
-user types ucb-shows
-
+-user types ucb-shows
+  -user selects theater (1-4) or 'exit'
+   -a list of that evening's shows are displayed
+   -user selects a show (numbered) for more information or can type 'theaters' or 'exit'
