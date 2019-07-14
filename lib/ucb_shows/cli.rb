@@ -3,12 +3,13 @@
 class UCBShows::CLI
   
   def call
-    puts "Tonight at the Upright Citizens Brigade Theaters:"
+    puts "What's playing tonight at the Upright Citizens Brigade:"
     list_theaters
-    menu
+    main_menu
   end
   
   def list_theaters
+    puts ""
     puts <<-DOC.gsub /^\s*/, ""
       1. UCB LA - Franklin Theater
       2. UCB LA - Sunset Theater
@@ -19,9 +20,10 @@ class UCBShows::CLI
   
   
   
-  def menu
+  def main_menu
     input = nil
     while input != "exit"
+      puts ""
       puts "Select a theater (1-4) for listings or 'exit' to exit:"
       input = gets.strip.downcase
       case input
@@ -29,13 +31,13 @@ class UCBShows::CLI
         franklin_menu
         # @franklin = UCBShows::Show.franklin
       when "2"
-        puts "More information about Sunset"
+        sunset_menu
       when "3"
-        puts "More information about Hell's Kitchen"
+        hk_menu
       when "4"
-        puts "More information about Subculture"
-      when "theaters"
-        list_theaters
+        subculture_menu
+      when "exit"
+        goodbye  
       else
         puts "WRONG! You can select a theater (1-4) or 'exit' to exit."
       end
@@ -45,7 +47,7 @@ class UCBShows::CLI
   def franklin_menu
     input = nil
     while input != "exit"
-      puts "Tonight's Schedule at UCB Franklin:"
+      puts "Tonight at UCB Franklin:"
       list_shows
       puts "Select a show for listings, 'menu', or 'exit'."
       input = gets.strip.downcase
@@ -59,8 +61,87 @@ class UCBShows::CLI
       when "4"
         puts "More information about Show 4"
       when "menu"
-        list_theaters
-        menu
+        call
+      when "exit"
+        goodbye
+      else
+        puts "WRONG! You can select a show ('1-4'), return to the main 'menu', or 'exit'."
+      end
+    end
+  end
+  
+  def sunset_menu
+    input = nil
+    while input != "exit"
+      puts "Tonight at UCB Sunset:"
+      list_shows
+      puts "Select a show for listings, 'menu', or 'exit'."
+      input = gets.strip.downcase
+      case input
+      when "1"
+        puts "More information about Show 1"
+      when "2"
+        puts "More information about Show 2"
+      when "3"
+        puts "More information about Show 3"
+      when "4"
+        puts "More information about Show 4"
+      when "menu"
+        call
+      when "exit"
+        goodbye
+      else
+        puts "WRONG! You can select a show ('1-4'), return to the main 'menu', or 'exit'."
+      end
+    end
+  end
+  
+  def hk_menu
+    input = nil
+    while input != "exit"
+      puts "Tonight at UCB Hell's Kitchen:"
+      list_shows
+      puts "Select a show for listings, 'menu', or 'exit'."
+      input = gets.strip.downcase
+      case input
+      when "1"
+        puts "More information about Show 1"
+      when "2"
+        puts "More information about Show 2"
+      when "3"
+        puts "More information about Show 3"
+      when "4"
+        puts "More information about Show 4"
+      when "menu"
+        call
+      when "exit"
+        goodbye
+      else
+        puts "WRONG! You can select a show ('1-4'), return to the main 'menu', or 'exit'."
+      end
+    end
+  end
+  
+  def subculture_menu
+    input = nil
+    while input != "exit"
+      puts "Tonight at UCB @ SubCulture:"
+      list_shows
+      puts "Select a show for listings, 'menu', or 'exit'."
+      input = gets.strip.downcase
+      case input
+      when "1"
+        puts "More information about Show 1"
+      when "2"
+        puts "More information about Show 2"
+      when "3"
+        puts "More information about Show 3"
+      when "4"
+        puts "More information about Show 4"
+      when "menu"
+        call
+      when "exit"
+        goodbye
       else
         puts "WRONG! You can select a show ('1-4'), return to the main 'menu', or 'exit'."
       end
@@ -72,5 +153,8 @@ class UCBShows::CLI
     puts "2. ASSSSCAT"
   end
     
-
+  def goodbye
+    puts "Peace!"
+  end
+  
 end
