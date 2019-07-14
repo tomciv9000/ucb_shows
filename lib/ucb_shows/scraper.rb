@@ -20,7 +20,6 @@ class UCBShows::Scraper
      franklin_hash << hash
    end
    franklin_hash
-   binding.pry
   end
 
   def make_shows
