@@ -3,6 +3,7 @@
 class UCBShows::CLI
   
   def call
+    puts ""
     puts "What's playing tonight at the Upright Citizens Brigade:"
     list_theaters
     main_menu
@@ -21,131 +22,111 @@ class UCBShows::CLI
   
   
   def main_menu
-    input = nil
-    while input != "exit"
-      puts ""
-      puts "Select a theater (1-4) for listings or 'exit' to exit:"
-      input = gets.strip.downcase
-      case input
-      when "1"
-        franklin_menu
-        # @franklin = UCBShows::Show.franklin
-      when "2"
-        sunset_menu
-      when "3"
-        hk_menu
-      when "4"
-        subculture_menu
-      when "exit"
-        goodbye  
-      else
-        puts "WRONG! You can select a theater (1-4) or 'exit' to exit."
-      end
+    puts ""
+    puts "Select a theater (1-4) for listings or 'exit' to exit:"
+    input = gets.strip.downcase
+    if input == "1"
+      franklin_menu
+      # @franklin = UCBShows::Show.franklin
+    elsif input == "2"
+      sunset_menu
+    elsif input == "3"
+      hk_menu
+    elsif input == "4"
+      subculture_menu
+    elsif input == "exit"
+      goodbye  
+    else
+      puts "WRONG! You can select a theater (1-4) or 'exit'."
     end
   end
   
   def franklin_menu
-    input = nil
-    while input != "exit"
       puts "Tonight at UCB Franklin:"
       list_shows
       puts "Select a show for listings, 'menu', or 'exit'."
       input = gets.strip.downcase
-      case input
-      when "1"
+      if input == "1"
         puts "More information about Show 1"
-      when "2"
+      elsif input == "2"
         puts "More information about Show 2"
-      when "3"
+      elsif input == "3"
         puts "More information about Show 3"
-      when "4"
+      elsif input == "4"
         puts "More information about Show 4"
-      when "menu"
+      elsif input == "menu"
         call
-      when "exit"
+      elsif input == "exit"
         goodbye
       else
-        puts "WRONG! You can select a show ('1-4'), return to the main 'menu', or 'exit'."
+        puts "WRONG! You can select a show, return to the main 'menu', or 'exit'."
       end
-    end
   end
   
   def sunset_menu
-    input = nil
-    while input != "exit"
       puts "Tonight at UCB Sunset:"
       list_shows
       puts "Select a show for listings, 'menu', or 'exit'."
       input = gets.strip.downcase
-      case input
-      when "1"
+      if input == "1"
         puts "More information about Show 1"
-      when "2"
+      elsif input == "2"
         puts "More information about Show 2"
-      when "3"
+      elsif input == "3"
         puts "More information about Show 3"
-      when "4"
+      elsif input == "4"
         puts "More information about Show 4"
-      when "menu"
+      elsif input == "menu"
         call
-      when "exit"
+      elsif input == "exit"
         goodbye
       else
-        puts "WRONG! You can select a show ('1-4'), return to the main 'menu', or 'exit'."
+        puts "WRONG! You can select a show, return to the main 'menu', or 'exit'."
       end
-    end
   end
   
   def hk_menu
-    input = nil
-    while input != "exit"
       puts "Tonight at UCB Hell's Kitchen:"
       list_shows
       puts "Select a show for listings, 'menu', or 'exit'."
       input = gets.strip.downcase
-      case input
-      when "1"
+      if input == "1"
         puts "More information about Show 1"
-      when "2"
+      elsif input == "2"
         puts "More information about Show 2"
-      when "3"
+      elsif input == "3"
         puts "More information about Show 3"
-      when "4"
+      elsif input == "4"
         puts "More information about Show 4"
-      when "menu"
+      elsif input == "menu"
         call
-      when "exit"
+      elsif input == "exit"
         goodbye
       else
-        puts "WRONG! You can select a show ('1-4'), return to the main 'menu', or 'exit'."
+        puts "WRONG! You can select a show, return to the main 'menu', or 'exit'."
       end
-    end
   end
   
   def subculture_menu
-    input = nil
-    while input != "exit"
-      puts "Tonight at UCB @ SubCulture:"
-      list_shows
-      puts "Select a show for listings, 'menu', or 'exit'."
-      input = gets.strip.downcase
-      case input
-      when "1"
+    puts "Tonight at UCB @ SubCulture:"
+    list_shows
+    puts "Select a show for listings, 'menu', or 'exit'."
+    input = gets.strip.downcase
+    if input == "1"
         puts "More information about Show 1"
-      when "2"
+      elsif input == "2"
         puts "More information about Show 2"
-      when "3"
+      elsif input == "3"
         puts "More information about Show 3"
-      when "4"
+      elsif input == "4"
         puts "More information about Show 4"
-      when "menu"
+      elsif input == "menu"
         call
-      when "exit"
+      elsif input == "exit"
         goodbye
       else
-        puts "WRONG! You can select a show ('1-4'), return to the main 'menu', or 'exit'."
+        puts "WRONG! You can select a show, return to the main 'menu', or 'exit'."
       end
-    end
   end
   
   def list_shows
