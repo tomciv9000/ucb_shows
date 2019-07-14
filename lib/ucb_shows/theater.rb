@@ -2,7 +2,7 @@ class UCBShows::Theater
   
   #extend Concerns::Findable -this might be helpful later to search shows?
 
-  attr_accessor :name, :shows, :address
+  attr_accessor :name, :shows
   
   @@all = []
   
