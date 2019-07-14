@@ -1,12 +1,26 @@
 class UCBShows::Scraper
 
-  def self.get_franklin
-    doc = Nokogiri::HTML(open("https://franklin.ucbtheatre.com/"))
-    binding.pry
-  end
+  #def self.get_franklin
+  #  doc = Nokogiri::HTML(open("https://franklin.ucbtheatre.com/"))
+  #  binding.pry
+  #end
 
-  def scrape_franklin_index
-     #self.get_franklin.css("div#t1-50 li")
+  def self.scrape_franklin_index
+     franklin_hash = []
+     doc = Nokogiri::HTML(open("https://franklin.ucbtheatre.com/"))
+     doc.css("div.col-xs-9").collect do |show|
+       hash = {
+         name: show.css("h4").text,
+         time: show.css("h5").text,
+         description: show.css("p").text,
+         price: show.css("a.btn strong").text,
+         status: show.css("a.btn").text.split(/\s*-\s*/)[1],
+         show_url: "https://franklin.ucbtheatre.com/#{show.css("a").attribute("href").text}"
+       }
+     franklin_hash << hash
+   end
+   franklin_hash
+   binding.pry
   end
 
   def make_shows
@@ -27,7 +41,7 @@ class UCBShows::Scraper
 #price = show_info.css("a.btn strong").text
 #status = show_info.css("a.btn").text.split(/\s*-\s*/)[1]
 #show_url = "https://franklin.ucbtheatre.com/#{show_info.css("a").attribute("href").text}"
-=> "/performance/69511"
+#=> "/performance/69511"
 
   
 end
