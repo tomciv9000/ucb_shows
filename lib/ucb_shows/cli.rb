@@ -43,7 +43,7 @@ class UCBShows::CLI
   
   def franklin_menu
       puts "Tonight at UCB Franklin:"
-      list_shows
+      puts "#{UCBShows::Show.franklin}" 
       puts "Select a show for listings, 'menu', or 'exit'."
       input = gets.strip.downcase
       if input == "1"
@@ -60,6 +60,7 @@ class UCBShows::CLI
         goodbye
       else
         puts "WRONG! You can select a show, return to the main 'menu', or 'exit'."
+        franklin_menu
       end
   end
   

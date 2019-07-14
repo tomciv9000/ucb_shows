@@ -1,5 +1,5 @@
 class UCBShows::Show 
-  attr_accessor :name, :time, :description, :price, :availability
+  attr_accessor :name, :time, :description, :price, :availability, :theater
   
   
   def self.franklin
