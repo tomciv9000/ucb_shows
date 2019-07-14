@@ -1,40 +1,64 @@
 class UCBShows::Show 
   attr_accessor :name, :time, :description, :price, :availability, :theater
-  
-  
-  def self.franklin
-    #should return all the franklin shows 
-    franklin_1 = self.new
-    franklin_1.name = "Sentimental Lady: Guilty Pleasures"
-    franklin_1.time = "7:00pm"
-    franklin_1.description = "If you've got a guilty pleasure you can't wait to get off your chest, come see Sentimental Lady: Guilty Pleasures, where one audience member's guilty pleasure will be transformed from a skeleton in a closet into a fully improvised show!"
-    franklin_1.price = "$9"
-    franklin_1.availability = "Tickets Available at https://franklin.ucbtheatre.com/performance/68768#reservation"
-    
-    franklin_2 = self.new
-    franklin_2.name = "ASSSSCAT"
-    franklin_2.time = "8:00pm"
-    franklin_2.description = "ASSSSCAT is the Upright Citizens Brigade's improv juggernaut that has played to critical acclaim and sold out audiences across the country."
-    franklin_2.price = "$14"
-    franklin_2.availability = "SOLD OUT"
-    
-    [franklin_1, franklin_2]
+
+  @@all = []
+
+  def self.new_from_index_page(r)
+    self.new(
+      r.css("h2").text,
+      "https://www.theworlds50best.com#{r.css("a").attribute("href").text}",
+      r.css("h3").text,
+      r.css(".position").text
+      )
   end
-  
-  def self.sunset
-  #
-  end 
-  
-  def self.hells_kitchen
-  #code here
+
+  def initialize(name=nil, url=nil, location=nil, position=nil)
+    @name = name
+    @url = url
+    @location = location
+    @position = position
+    @@all << self
   end
-  
-  def self.subculture
-  #
-  end 
-  
+
   def self.all
     @@all
   end
-  
+
+  def self.find(id)
+    self.all[id-1]
+  end
+
+  def best_dish
+    @best_dish ||= doc.css("div.c-4.nr.nt ul:nth-child(8) li").text
+    # @best_dish ||= doc.xpath("//div[@class='c-4 nr nt']/ul[3]/li").text
+  end
+
+  def food_style
+    @food_style ||= doc.css("div.c-4.nr.nt ul:nth-child(6) li").text
+    # @food_style ||= doc.xpath("//div[@class='c-4 nr nt']/ul[2]/li").text
+  end
+
+  def contact
+    @contact ||= doc.css("div.c-4.nr.nt ul:nth-child(10) li:nth-child(1)").text.split("+").join(". Tel: +")
+    # @contact ||= doc.xpath("//div[@class='c-4 nr nt']/ul[4]/li[1]").text.split("+").join(". Tel: +")
+  end
+
+  def head_chef
+    @head_chef ||= doc.css("div.c-4.nr.nt ul:nth-child(3) li").text.split(" (pictured)").join("")
+    # @head_chef ||= doc.xpath("//div[@class='c-4 nr nt']/ul[1]/li").text.split(" (pictured)").join("")
+  end
+
+  def website_url
+    @website_url ||= doc.css("div.c-4.nr.nt ul:nth-child(10) li:nth-child(2) a").text
+    # @website_url ||= doc.xpath("//div[@class='c-4 nr nt']/ul[4]/li[2]/a").text
+  end
+
+  def description
+    @description ||= doc.css("div.c-8.nl.nt > p:nth-child(6)").text
+    # @description ||= doc.xpath("//div[@class='c-8 nl nt']/p[3]").text
+  end
+
+  def doc
+    @doc ||= Nokogiri::HTML(open(self.url))
+  end
 end
