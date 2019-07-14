@@ -26,6 +26,8 @@ class UCBShows::Scraper
 #description = show_info.css("p").text
 #price = show_info.css("a.btn strong").text
 #status = show_info.css("a.btn").text.split(/\s*-\s*/)[1]
+#show_url = "https://franklin.ucbtheatre.com/#{show_info.css("a").attribute("href").text}"
+=> "/performance/69511"
 
   
 end
