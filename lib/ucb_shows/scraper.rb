@@ -48,7 +48,7 @@ def self.scrape_sunset_index
   end
 
   def self.make_sunset_shows
-   @sunset_array.collect {|show| UCBShows::Show.new(show)}
+   @sunset_array.collect {|show| UCBShows::Show.create_from_hash(show)}
   end  
   
   def self.scrape_hk_index
@@ -70,7 +70,7 @@ def self.scrape_sunset_index
   end
 
   def self.make_hk_shows
-   @hk_array.collect {|show| UCBShows::Show.new(show)}
+   @hk_array.collect {|show| UCBShows::Show.create_from_hash(show)}
   end  
 
   def self.scrape_subculture_index
@@ -92,7 +92,7 @@ def self.scrape_sunset_index
   end
 
   def self.make_subculture_shows
-   @subculture_array.collect {|show| UCBShows::Show.new(show)}
+   @subculture_array.collect {|show| UCBShows::Show.create_from_hash(show)}
   end
   
 #  show titles - doc.css("div.col-xs-9 h4 a").collect {|x| x.text}

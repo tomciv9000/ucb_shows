@@ -10,18 +10,18 @@ class UCBShows::Show
     @@all << self
   end
   
-  def venue = (venue)
+  def venue= (venue)
     @venue = venue
     venue.add_show(self)
   end 
 
   def self.create(show_hash, venue)
-    new_show = Show.new(show_hash, venue)
+    new_show = UCBShows::Show.new(show_hash, venue)
   end
   
   def self.new_from_hash(show_hash)
     venueless_hash = show_hash.select {|k,v| k != "venue"}
-	  venue = Venue.find_or_create_by_name(show_hash[:venue])
+	  venue = UCBShows::Venue.find_or_create_by_name(show_hash[:venue])
 	  self.create(venueless_hash, venue)
   end
   

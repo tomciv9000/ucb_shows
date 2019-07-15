@@ -20,7 +20,7 @@ class UCBShows::Venue
   end
   
   def self.create(name)
-    venue = self.new(name)
+    venue = UCBShows::Venue.new(name)
     venue.save
     venue
   end
@@ -35,11 +35,11 @@ class UCBShows::Venue
     @shows
   end
   
-  def find_by_name(name)
+  def self.find_by_name(name)
     self.all.detect {|venue| venue.name == name}
   end
 
-  def find_or_create_by_name(name)
+  def self.find_or_create_by_name(name)
     find_by_name(name) || self.create(name)
   end
   

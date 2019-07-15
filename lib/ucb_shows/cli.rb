@@ -16,12 +16,8 @@ class UCBShows::CLI
     puts ""
     puts "WHAT'S HAPPENING TONIGHT AT THE UPRIGHT CITIZENS BRIGADE?"
     puts ""
-    puts <<-DOC.gsub /^\s*/, ""
-      1. UCB LA - Franklin Theater
-      2. UCB LA - Sunset Theater
-      3. UCB NY - Hell's Kitchen
-      4. UCB NY - at SubCulture
-    DOC
+    venues = Venue.all
+    venues.each_with_index(1){|venue, i| puts "#{i}. #{venue.name}"}
   end
   
   def main_menu
@@ -179,6 +175,16 @@ class UCBShows::CLI
     puts ""
     puts "Bye-BYEEEEE!!!"
   end
+  
+  #def list_shows_by_venue  -- not sure exactly how to use this yet
+  #  puts "Please enter the name of an venue:"
+  #  input = gets.strip
+  #  if artist = Artist.find_by_name(input)
+  #    artist.songs.sort {|a,b| a.name <=> b.name}.each.with_index(1) do |song, index|
+  #    puts "#{index}. #{song.name} - #{song.genre.name}"
+  #    end
+  #  end
+  #end 
   
   def print_franklin
     puts ""
