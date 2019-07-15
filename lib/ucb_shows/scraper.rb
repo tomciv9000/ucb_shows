@@ -1,12 +1,6 @@
 class UCBShows::Scraper
 
-  #def self.get_franklin
-  #  doc = Nokogiri::HTML(open("https://franklin.ucbtheatre.com/"))
-  #  binding.pry
-  #end
-
   def self.scrape_franklin_index
-     franklin_hash = []
      doc = Nokogiri::HTML(open("https://franklin.ucbtheatre.com/"))
      doc.css("div.col-xs-9").collect do |show|
        hash = {
@@ -17,15 +11,14 @@ class UCBShows::Scraper
          status: show.css("a.btn").text.split(/\s*-\s*/)[1],
          show_url: "https://franklin.ucbtheatre.com/#{show.css("a").attribute("href").text}"
        }
-     franklin_hash << hash
+     @franklin_hash = hash
    end
-   franklin_hash
+   binding.pry
+   @franklin_hash
   end
 
-  def make_shows
-    #scrape_franklin_index.each do |r|
-      #UCBShows::Shows.new_from_index_page(r)
-    #end
+  def self.make_franklin_shows
+      UCBShows::Show.new(@franklin_hash)
   end
   
 #  show titles - doc.css("div.col-xs-9 h4 a").collect {|x| x.text}
