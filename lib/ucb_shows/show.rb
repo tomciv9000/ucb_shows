@@ -13,3 +13,6 @@ class UCBShows::Show
   end
 
 end
+
+#@franklin_array.collect {|show| UCBShows::Show.new(show)} - this makes new shows!!!!
+#UCBShows::Show.all.each_with_index.map{|show, index| puts "#{index+1}. #{show.name} - #{show.time}"} - this works!

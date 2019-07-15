@@ -43,7 +43,8 @@ class UCBShows::CLI
   
   def franklin_menu
       puts "Tonight at UCB Franklin:"
-      puts "#{UCBShows::Show.franklin}" 
+      print_franklin
+      puts ""
       puts "Select a show for listings, 'menu', or 'exit'."
       input = gets.strip.downcase
       if input == "1"
@@ -137,6 +138,13 @@ class UCBShows::CLI
     
   def goodbye
     puts "Peace!"
+  end
+  
+  def print_franklin
+    puts ""
+    UCBShows::Show.all.each_with_index do |show, index| 
+      puts "#{index+1}. #{show.name} - #{show.time}"
+    end
   end
   
 end

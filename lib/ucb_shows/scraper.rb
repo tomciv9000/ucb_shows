@@ -1,6 +1,7 @@
 class UCBShows::Scraper
 
   def self.scrape_franklin_index
+    @franklin_array = []
      doc = Nokogiri::HTML(open("https://franklin.ucbtheatre.com/"))
      doc.css("div.col-xs-9").collect do |show|
        hash = {
@@ -11,14 +12,13 @@ class UCBShows::Scraper
          status: show.css("a.btn").text.split(/\s*-\s*/)[1],
          show_url: "https://franklin.ucbtheatre.com/#{show.css("a").attribute("href").text}"
        }
-     @franklin_hash = hash
+     @franklin_array << hash
    end
    binding.pry
-   @franklin_hash
   end
 
   def self.make_franklin_shows
-      UCBShows::Show.new(@franklin_hash)
+   @franklin_array.collect {|show| UCBShows::Show.new(show)}
   end
   
 #  show titles - doc.css("div.col-xs-9 h4 a").collect {|x| x.text}
