@@ -4,6 +4,7 @@ class UCBShows::CLI
   
   def call
     UCBShows::Scraper.scrape_franklin_index
+    UCBShows::Scraper.scrape_sunset_index
     puts ""
     puts "What's playing tonight at the Upright Citizens Brigade:"
     list_theaters
@@ -142,6 +143,13 @@ class UCBShows::CLI
   end
   
   def print_franklin
+    puts ""
+    UCBShows::Show.all.each_with_index do |show, index| 
+      puts "#{index+1}. #{show.name} - #{show.time}"
+    end
+  end
+  
+  def print_sunset
     puts ""
     UCBShows::Show.all.each_with_index do |show, index| 
       puts "#{index+1}. #{show.name} - #{show.time}"

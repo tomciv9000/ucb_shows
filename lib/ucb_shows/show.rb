@@ -5,12 +5,21 @@ class UCBShows::Show
 
   def initialize(venue_hash)
     venue_hash.each {|k, v| self.send(("#{k}="),v)}
+    
     @@all << self
   end
   
   def self.all
     @@all
   end
+  
+  #def self.new_from_filename(filename)
+	#  song_parts = filename.split(" - ")
+	#  song_name = song_parts[1]
+	#  artist = Artist.find_or_create_by_name(song_parts[0])
+	#  genre = Genre.find_or_create_by_name(song_parts[2].split(".")[0])
+	#  self.create(song_name, artist, genre)
+  #end
 
 end
 
