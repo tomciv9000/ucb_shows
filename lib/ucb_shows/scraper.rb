@@ -26,7 +26,7 @@ class UCBShows::Scraper
   end
 
   def self.make_franklin_shows
-   @franklin_array.collect {|show| UCBShows::Show.new(show)}
+   @franklin_array.collect {|show| UCBShows::Show.create_from_hash(show)}
   end
   
 def self.scrape_sunset_index
