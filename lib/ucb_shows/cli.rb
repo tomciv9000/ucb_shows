@@ -3,8 +3,7 @@
 class UCBShows::CLI
   
   def call
-    UCBShows::Scraper.scrape_franklin_index
-    UCBShows::Scraper.scrape_sunset_index
+    UCBShows::Scraper.scrape_venues
     puts ""
     puts "What's playing tonight at the Upright Citizens Brigade:"
     list_theaters
