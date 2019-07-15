@@ -83,20 +83,29 @@ class UCBShows::CLI
       puts ""
       puts "Select a show for listings, 'menu', or 'exit'."
       input = gets.strip.downcase
-      if input == "1"
-        puts "More information about Show 1"
-      elsif input == "2"
-        puts "More information about Show 2"
-      elsif input == "3"
-        puts "More information about Show 3"
-      elsif input == "4"
-        puts "More information about Show 4"
+      if input.to_i > 0 
+        the_show = UCBShows::Show.all_sunset[input.to_i-1]
+        print_details(the_show)
+        puts ""
+        puts "Would you like to see details on another show? Enter Y or N"
+        input = gets.strip.downcase
+        if input == "y"
+          puts ""
+          sunset_menu
+        elsif input == "n"
+          goodbye
+        else
+          puts ""
+          puts "I don't understand that answer."
+          sunset_menu
+        end
       elsif input == "menu"
         start
       elsif input == "exit"
         goodbye
       else
         puts "WRONG! You can select a show, return to the main 'menu', or 'exit'."
+        sunset_menu
       end
   end
   
@@ -107,20 +116,29 @@ class UCBShows::CLI
       puts ""
       puts "Select a show for listings, 'menu', or 'exit'."
       input = gets.strip.downcase
-      if input == "1"
-        puts "More information about Show 1"
-      elsif input == "2"
-        puts "More information about Show 2"
-      elsif input == "3"
-        puts "More information about Show 3"
-      elsif input == "4"
-        puts "More information about Show 4"
+      if input.to_i > 0 
+        the_show = UCBShows::Show.all_hk[input.to_i-1]
+        print_details(the_show)
+        puts ""
+        puts "Would you like to see details on another show? Enter Y or N"
+        input = gets.strip.downcase
+        if input == "y"
+          puts ""
+          hk_menu
+        elsif input == "n"
+          goodbye
+        else
+          puts ""
+          puts "I don't understand that answer."
+          hk_menu
+        end
       elsif input == "menu"
         start
       elsif input == "exit"
         goodbye
       else
         puts "WRONG! You can select a show, return to the main 'menu', or 'exit'."
+        hk_menu
       end
   end
   
@@ -131,20 +149,29 @@ class UCBShows::CLI
     puts ""
     puts "Select a show for listings, 'menu', or 'exit'."
     input = gets.strip.downcase
-    if input == "1"
-        puts "More information about Show 1"
-      elsif input == "2"
-        puts "More information about Show 2"
-      elsif input == "3"
-        puts "More information about Show 3"
-      elsif input == "4"
-        puts "More information about Show 4"
+      if input.to_i > 0 
+        the_show = UCBShows::Show.all_subculture[input.to_i-1]
+        print_details(the_show)
+        puts ""
+        puts "Would you like to see details on another show? Enter Y or N"
+        input = gets.strip.downcase
+        if input == "y"
+          puts ""
+          subculture_menu
+        elsif input == "n"
+          goodbye
+        else
+          puts ""
+          puts "I don't understand that answer."
+          subculture_menu
+        end
       elsif input == "menu"
         start
       elsif input == "exit"
         goodbye
       else
         puts "WRONG! You can select a show, return to the main 'menu', or 'exit'."
+        subculture_menu
       end
   end
     
