@@ -1,11 +1,12 @@
 class UCBShows::Show 
-  attr_accessor :name, :time, :description, :price, :status, :show_url
+  attr_accessor :name, :time, :description, :price, :status, :show_url, :venue
 
   @@all = []
 
   def initialize(venue_hash)
-    venue_hash.each {|k, v| self.send(("#{k}="),v)}
-    
+    venue_hash.each do |k, v| 
+      self.send(("#{k}="),v)
+      UCBShows::Venue.find_or_create_by_name("#{self.venue}")
     @@all << self
   end
   

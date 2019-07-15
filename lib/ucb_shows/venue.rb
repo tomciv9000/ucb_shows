@@ -1,7 +1,5 @@
-class UCBShows::Theater 
+class UCBShows::Venue
   
-  #extend Concerns::Findable -this might be helpful later to search shows?
-
   attr_accessor :name, :shows
   
   @@all = []
@@ -20,19 +18,27 @@ class UCBShows::Theater
   end
   
   def self.create(name)
-    theater = self.new(name)
-    theater.save
-    theater
+    venue = self.new(name)
+    venue.save
+    venue
   end
 
   
   def add_show(show)
-    show.theater = self
+    show.venue = self
     shows << show 
   end
   
   def shows 
     @shows
+  end
+  
+  def self.find_by_name(name)
+    self.all.detect {|x| song.name == name}
+  end
+
+  def self.find_or_create_by_name(name)
+    self.find_by_name(name) || self.create(name)
   end
     
 end
