@@ -14,7 +14,7 @@ class UCBShows::Scraper
        }
      @franklin_array << hash
    end
-   binding.pry
+   self.make_franklin_shows
   end
 
   def self.make_franklin_shows
