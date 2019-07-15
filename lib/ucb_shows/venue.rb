@@ -28,7 +28,7 @@ class UCBShows::Venue
   
   def add_show(show)
     show.venue = self unless show.venue
-    shows << show unless shows.include?(show)
+    @shows << show unless shows.include?(show)
   end
   
   def shows 

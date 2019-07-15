@@ -20,7 +20,7 @@ class UCBShows::Show
   end
   
   def self.new_from_hash(show_hash)
-    venueless_hash = show_hash.select {|k,v| k != "venue"}
+    venueless_hash = show_hash.select {|k,v| k != :venue}
 	  venue = UCBShows::Venue.find_or_create_by_name(show_hash[:venue])
 	  self.create(venueless_hash, venue)
   end

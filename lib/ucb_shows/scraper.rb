@@ -12,7 +12,7 @@ class UCBShows::Scraper
      doc = Nokogiri::HTML(open("https://franklin.ucbtheatre.com/"))
      doc.css("div.col-xs-9").collect do |show|
        hash = {
-         venue: doc.css("div.col-xs-4 img.img-responsive").attribute("alt").text.gsub(/\smap/, ""),
+         venue: "UCB Franklin - LA",
          name: show.css("h4").text,
          time: show.css("h5").text,
          description: show.css("p").text,
@@ -34,7 +34,7 @@ def self.scrape_sunset_index
      doc = Nokogiri::HTML(open("https://sunset.ucbtheatre.com/"))
      doc.css("div.col-xs-9").collect do |show|
        hash = {
-         venue: doc.css("div.col-xs-4 img.img-responsive").attribute("alt").text.gsub(/\smap/, ""),
+         venue: "UCB Sunset - LA",
          name: show.css("h4").text,
          time: show.css("h5").text,
          description: show.css("p").text,
@@ -56,7 +56,7 @@ def self.scrape_sunset_index
      doc = Nokogiri::HTML(open("https://hellskitchen.ucbtheatre.com/"))
      doc.css("div.col-xs-9").collect do |show|
        hash = {
-         venue: doc.css("div.col-xs-4 img.img-responsive").attribute("alt").text.gsub(/\smap/, ""),
+         venue: "UCB Hell's Kitchen",
          name: show.css("h4").text,
          time: show.css("h5").text,
          description: show.css("p").text,

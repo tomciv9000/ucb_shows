@@ -16,8 +16,8 @@ class UCBShows::CLI
     puts ""
     puts "WHAT'S HAPPENING TONIGHT AT THE UPRIGHT CITIZENS BRIGADE?"
     puts ""
-    venues = Venue.all
-    venues.each_with_index(1){|venue, i| puts "#{i}. #{venue.name}"}
+    venues = UCBShows::Venue.all
+    venues.each_with_index{|venue, i| puts "#{i+1}. #{venue.name}"}
   end
   
   def main_menu
