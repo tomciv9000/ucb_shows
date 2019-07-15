@@ -53,6 +53,19 @@ class UCBShows::CLI
       if input.to_i > 0 
         the_show = UCBShows::Show.all_franklin[input.to_i-1]
         print_details(the_show)
+        puts ""
+        puts "Would you like to see details on another show? Enter Y or N"
+        input = gets.strip.downcase
+        if input == "y"
+          puts ""
+          franklin_menu
+        elsif input == "n"
+          goodbye
+        else
+          puts ""
+          puts "I don't understand that answer."
+          franklin_menu
+        end
       elsif input == "menu"
         start
       elsif input == "exit"
