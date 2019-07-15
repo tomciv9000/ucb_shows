@@ -10,7 +10,6 @@ class UCBShows::Show
   
   def self.all
     @@all
-    
   end
 
   def self.all_franklin
@@ -28,6 +27,10 @@ class UCBShows::Show
   def self.all_subculture
     @@all.select{|show| show.venue=="UCB Subculture"}
   end 
+  
+  def self.find(id)
+    self.all[id-1]
+  end
 end
 
 #@franklin_array.collect {|show| UCBShows::Show.new(show)} - this makes new shows!!!!

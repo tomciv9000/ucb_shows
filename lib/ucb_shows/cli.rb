@@ -50,14 +50,9 @@ class UCBShows::CLI
       puts ""
       puts "Select a show for listings, 'menu', or 'exit'."
       input = gets.strip.downcase
-      if input == "1"
-        puts "More information about Show 1"
-      elsif input == "2"
-        puts "More information about Show 2"
-      elsif input == "3"
-        puts "More information about Show 3"
-      elsif input == "4"
-        puts "More information about Show 4"
+      if input.to_i > 0 
+        the_show = UCBShows::Show.all_franklin[input.to_i-1]
+        print_details(the_show)
       elsif input == "menu"
         start
       elsif input == "exit"
@@ -177,6 +172,22 @@ class UCBShows::CLI
         puts "(#{index+1}) #{show.time} - #{show.name}"
       end
     end
+  end
+  
+  def print_details(show)
+    puts ""
+    puts "----------- #{show.name} -----------"
+    puts ""
+    puts "Location:           #{show.venue}"
+    puts "Time:               #{show.time}"
+    puts "Price:              #{show.price}"
+    puts "Status:             #{show.status}"
+    puts "Website:            #{show.show_url}"
+    puts ""
+    puts "---------------Description--------------"
+    puts ""
+    puts "#{show.description}"
+    puts ""
   end
   
 end
