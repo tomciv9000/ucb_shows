@@ -2,26 +2,32 @@ class UCBShows::Show
   attr_accessor :name, :time, :description, :price, :status, :show_url, :venue
 
   @@all = []
-
+  
   def initialize(venue_hash)
-    venue_hash.each do |k, v| 
-      self.send(("#{k}="),v)
-      UCBShows::Venue.find_or_create_by_name("#{self.venue}")
+    venue_hash.each  {|k, v| self.send(("#{k}="),v)}
     @@all << self
   end
   
   def self.all
     @@all
+    
+  end
+
+  def self.all_franklin
+    @@all.select{|show| show.venue=="UCB Franklin"}
+  end 
+  
+  def self.all_sunset
+    @@all.select{|show| show.venue=="UCB Sunset"}
   end
   
-  #def self.new_from_filename(filename)
-	#  song_parts = filename.split(" - ")
-	#  song_name = song_parts[1]
-	#  artist = Artist.find_or_create_by_name(song_parts[0])
-	#  genre = Genre.find_or_create_by_name(song_parts[2].split(".")[0])
-	#  self.create(song_name, artist, genre)
-  #end
+  def self.all_hk
+    @@all.select{|show| show.venue=="UCBT Hell's Kitchen"}
+  end
 
+  def self.all_subculture
+    @@all.select{|show| show.venue=="UCB Subculture"}
+  end 
 end
 
 #@franklin_array.collect {|show| UCBShows::Show.new(show)} - this makes new shows!!!!

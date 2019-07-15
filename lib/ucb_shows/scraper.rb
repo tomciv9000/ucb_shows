@@ -10,7 +10,6 @@ class UCBShows::Scraper
   def self.scrape_franklin_index
     @franklin_array = []
      doc = Nokogiri::HTML(open("https://franklin.ucbtheatre.com/"))
-     binding.pry
      doc.css("div.col-xs-9").collect do |show|
        hash = {
          venue: doc.css("div.col-xs-4 img.img-responsive").attribute("alt").text.gsub(/\smap/, ""),
@@ -79,7 +78,7 @@ def self.scrape_sunset_index
      doc = Nokogiri::HTML(open("https://subculture.ucbtheatre.com/"))
      doc.css("div.col-xs-9").collect do |show|
        hash = {
-         venue: doc.css("div.col-xs-4 img.img-responsive").attribute("alt").text.gsub(/\smap/, ""),
+         venue: "UCB at SubCulture",
          name: show.css("h4").text,
          time: show.css("h5").text,
          description: show.css("p").text,

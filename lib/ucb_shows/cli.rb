@@ -4,13 +4,17 @@ class UCBShows::CLI
   
   def call
     UCBShows::Scraper.scrape_venues
-    puts ""
-    puts "What's playing tonight at the Upright Citizens Brigade:"
+    start
+  end
+  
+  def start
     list_theaters
     main_menu
   end
   
   def list_theaters
+    puts ""
+    puts "WHAT'S HAPPENING TONIGHT AT THE UPRIGHT CITIZENS BRIGADE?"
     puts ""
     puts <<-DOC.gsub /^\s*/, ""
       1. UCB LA - Franklin Theater
@@ -20,15 +24,12 @@ class UCBShows::CLI
     DOC
   end
   
-  
-  
   def main_menu
     puts ""
     puts "Select a theater (1-4) for listings or 'exit' to exit:"
     input = gets.strip.downcase
     if input == "1"
       franklin_menu
-      # @franklin = UCBShows::Show.franklin
     elsif input == "2"
       sunset_menu
     elsif input == "3"
@@ -43,6 +44,7 @@ class UCBShows::CLI
   end
   
   def franklin_menu
+      puts ""
       puts "Tonight at UCB Franklin:"
       print_franklin
       puts ""
@@ -57,7 +59,7 @@ class UCBShows::CLI
       elsif input == "4"
         puts "More information about Show 4"
       elsif input == "menu"
-        call
+        start
       elsif input == "exit"
         goodbye
       else
@@ -67,8 +69,10 @@ class UCBShows::CLI
   end
   
   def sunset_menu
+      puts ""
       puts "Tonight at UCB Sunset:"
-      list_shows
+      print_sunset
+      puts ""
       puts "Select a show for listings, 'menu', or 'exit'."
       input = gets.strip.downcase
       if input == "1"
@@ -80,7 +84,7 @@ class UCBShows::CLI
       elsif input == "4"
         puts "More information about Show 4"
       elsif input == "menu"
-        call
+        start
       elsif input == "exit"
         goodbye
       else
@@ -89,8 +93,10 @@ class UCBShows::CLI
   end
   
   def hk_menu
+      puts ""
       puts "Tonight at UCB Hell's Kitchen:"
-      list_shows
+      print_hk
+      puts ""
       puts "Select a show for listings, 'menu', or 'exit'."
       input = gets.strip.downcase
       if input == "1"
@@ -102,7 +108,7 @@ class UCBShows::CLI
       elsif input == "4"
         puts "More information about Show 4"
       elsif input == "menu"
-        call
+        start
       elsif input == "exit"
         goodbye
       else
@@ -111,8 +117,10 @@ class UCBShows::CLI
   end
   
   def subculture_menu
+    puts ""
     puts "Tonight at UCB @ SubCulture:"
-    list_shows
+    print_subculture
+    puts ""
     puts "Select a show for listings, 'menu', or 'exit'."
     input = gets.strip.downcase
     if input == "1"
@@ -124,34 +132,50 @@ class UCBShows::CLI
       elsif input == "4"
         puts "More information about Show 4"
       elsif input == "menu"
-        call
+        start
       elsif input == "exit"
         goodbye
       else
         puts "WRONG! You can select a show, return to the main 'menu', or 'exit'."
       end
   end
-  
-  def list_shows
-    puts "1. Sentimental Lady: Guilty Pleasures"
-    puts "2. ASSSSCAT"
-  end
     
   def goodbye
-    puts "Peace!"
+    puts ""
+    puts "Bye-BYEEEEE!!!"
   end
   
   def print_franklin
     puts ""
-    UCBShows::Show.all.each_with_index do |show, index| 
-      puts "#{index+1}. #{show.name} - #{show.time}"
+    UCBShows::Show.all_franklin.each_with_index do |show, index| 
+      puts "(#{index+1}) #{show.time} - #{show.name}"
     end
   end
   
   def print_sunset
     puts ""
-    UCBShows::Show.all.each_with_index do |show, index| 
-      puts "#{index+1}. #{show.name} - #{show.time}"
+    UCBShows::Show.all_sunset.each_with_index do |show, index| 
+      puts "(#{index+1}) #{show.time} - #{show.name}"
+    end
+  end
+  
+  def print_hk
+    puts ""
+    UCBShows::Show.all_hk.each_with_index do |show, index| 
+      puts "(#{index+1}) #{show.time} - #{show.name}"
+    end
+  end
+  
+  def print_subculture
+    puts ""
+    if UCBShows::Show.all_subculture.empty?
+      puts "No shows!!! Bang on the keyboard, then press enter to return to main menu."
+      input = gets.strip
+      start
+    else
+      UCBShows::Show.all_subculture.each_with_index do |show, index| 
+        puts "(#{index+1}) #{show.time} - #{show.name}"
+      end
     end
   end
   
