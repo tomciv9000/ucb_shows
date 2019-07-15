@@ -9,29 +9,30 @@ class UCBShows::CLI
   
   def start
     list_theaters
-    main_menu
   end
   
   def list_theaters
     puts ""
-    puts "WHAT'S HAPPENING TONIGHT AT THE UPRIGHT CITIZENS BRIGADE?"
+    puts "WHICH UCB THEATERS HAVE SHOWS TONIGHT?"
     puts ""
     venues = UCBShows::Venue.all
     venues.each_with_index{|venue, i| puts "#{i+1}. #{venue.name}"}
-  end
-  
-  def main_menu
     puts ""
-    puts "Select a theater (1-4) for listings or 'exit' to exit:"
+    puts "Select a theater for listings or 'exit' to exit:"
     input = gets.strip.downcase
-    if input == "1"
-      franklin_menu
-    elsif input == "2"
-      sunset_menu
-    elsif input == "3"
-      hk_menu
-    elsif input == "4"
-      subculture_menu
+    
+    #this is me trying something, not tested------------------------------
+    if input.to_i <= (venues.length) && != 0
+      show_listings(input)
+    #---------------------------------------------------------------------
+    #if input == "1"
+    #  franklin_menu
+    #elsif input == "2"
+    #  sunset_menu
+    #elsif input == "3"
+    #  hk_menu
+    #elsif input == "4"
+    #  subculture_menu
     elsif input == "exit"
       goodbye  
     else
