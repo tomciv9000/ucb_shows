@@ -26,7 +26,7 @@ class UCBShows::Scraper
   end
 
   def self.make_franklin_shows
-   @franklin_array.collect {|show| UCBShows::Show.create_from_hash(show)}
+   @franklin_array.collect {|show| UCBShows::Show.new_from_hash(show)}
   end
   
 def self.scrape_sunset_index
@@ -48,7 +48,7 @@ def self.scrape_sunset_index
   end
 
   def self.make_sunset_shows
-   @sunset_array.collect {|show| UCBShows::Show.create_from_hash(show)}
+   @sunset_array.collect {|show| UCBShows::Show.new_from_hash(show)}
   end  
   
   def self.scrape_hk_index
@@ -70,7 +70,7 @@ def self.scrape_sunset_index
   end
 
   def self.make_hk_shows
-   @hk_array.collect {|show| UCBShows::Show.create_from_hash(show)}
+   @hk_array.collect {|show| UCBShows::Show.new_from_hash(show)}
   end  
 
   def self.scrape_subculture_index
@@ -92,22 +92,7 @@ def self.scrape_sunset_index
   end
 
   def self.make_subculture_shows
-   @subculture_array.collect {|show| UCBShows::Show.create_from_hash(show)}
+   @subculture_array.collect {|show| UCBShows::Show.new_from_hash(show)}
   end
-  
-#  show titles - doc.css("div.col-xs-9 h4 a").collect {|x| x.text}
-#=> ["The Great American Cabinet of Curiosities",
-# "Shitty Jobs",
-# "Queen George Slacks Off"]
-
-#show_info = doc.css("div.col-xs-9")
-#name = show_info.css("h4").text
-#time = show_info.css("h5").text
-#description = show_info.css("p").text
-#price = show_info.css("a.btn strong").text
-#status = show_info.css("a.btn").text.split(/\s*-\s*/)[1]
-#show_url = "https://franklin.ucbtheatre.com/#{show_info.css("a").attribute("href").text}"
-#=> "/performance/69511"
-
   
 end
