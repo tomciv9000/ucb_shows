@@ -1,10 +1,15 @@
 class UCBShows::Scraper
 
+  def initialize
+    @ucb_venues_array = []
+  end
+  
   def self.scrape_venues
     self.scrape_franklin_index
     self.scrape_sunset_index
     self.scrape_hk_index
     self.scrape_subculture_index
+    self.make_shows
   end
 
   def self.scrape_franklin_index
@@ -20,16 +25,12 @@ class UCBShows::Scraper
          status: show.css("a.btn").text.split(/\s*-\s*/)[1],
          show_url: "https://franklin.ucbtheatre.com/#{show.css("a").attribute("href").text}"
        }
-     @franklin_array << hash
-   end
-   self.make_franklin_shows
-  end
-
-  def self.make_franklin_shows
-   @franklin_array.collect {|show| UCBShows::Show.new_from_hash(show)}
+       @franklin_array << hash
+     end
+     @ucb_venues_array << @franklin_array
   end
   
-def self.scrape_sunset_index
+  def self.scrape_sunset_index
     @sunset_array = []
      doc = Nokogiri::HTML(open("https://sunset.ucbtheatre.com/"))
      doc.css("div.col-xs-9").collect do |show|
@@ -42,14 +43,10 @@ def self.scrape_sunset_index
          status: show.css("a.btn").text.split(/\s*-\s*/)[1],
          show_url: "https://sunset.ucbtheatre.com/#{show.css("a").attribute("href").text}"
        }
-     @sunset_array << hash
-   end
-   self.make_sunset_shows
+       @sunset_array << hash
+     end
+    @ucb_venues_array << @sunset_array
   end
-
-  def self.make_sunset_shows
-   @sunset_array.collect {|show| UCBShows::Show.new_from_hash(show)}
-  end  
   
   def self.scrape_hk_index
     @hk_array = []
@@ -65,13 +62,9 @@ def self.scrape_sunset_index
          show_url: "https://hellskitchen.ucbtheatre.com/#{show.css("a").attribute("href").text}"
        }
      @hk_array << hash
-   end
-   self.make_hk_shows
+    end
+   @ucb_venues_array << @hk_array
   end
-
-  def self.make_hk_shows
-   @hk_array.collect {|show| UCBShows::Show.new_from_hash(show)}
-  end  
 
   def self.scrape_subculture_index
     @subculture_array = []
@@ -87,12 +80,14 @@ def self.scrape_sunset_index
          show_url: "https://subculture.ucbtheatre.com/#{show.css("a").attribute("href").text}"
        }
      @subculture_array << hash
-   end
-   self.make_subculture_shows
+     end
+   @ucb_venues_array << @subculture_array
   end
-
-  def self.make_subculture_shows
-   @subculture_array.collect {|show| UCBShows::Show.new_from_hash(show)}
+  
+  def self.make_shows
+    @ucb_venues_array.each do |venue|
+      venue.collect {|show| UCBShows::Show.new_from_hash(show)}
+    end
   end
   
 end
