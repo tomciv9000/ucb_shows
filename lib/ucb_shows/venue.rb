@@ -1,6 +1,4 @@
 class UCBShows::Venue 
-  
-  #extend Concerns::Findable - maybe useful?
 
   attr_accessor :name, :shows
   
@@ -27,21 +25,23 @@ class UCBShows::Venue
 
   
   def add_show(show)
-    show.venue = self unless show.venue
-    @shows << show unless shows.include?(show)
+    show.venue = self 
+    @shows << show 
   end
   
   def shows 
     @shows
   end
   
-  def self.find_by_name(name)
-    self.all.detect {|venue| venue.name == name}
-  end
-
-  def self.find_or_create_by_name(name)
-    find_by_name(name) || self.create(name)
-  end
+  
+  # - this is a findable / createable set of methods that might be helpful later but aren't needed now
+  #def self.find_by_name(name)
+  #  self.all.detect {|venue| venue.name == name}
+  #end
+#
+  #def self.find_or_create_by_name(name)
+  #  find_by_name(name) || self.create(name)
+  #end
   
   
 end

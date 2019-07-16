@@ -9,27 +9,20 @@ class UCBShows::Show
     show_hash.each  {|k, v| self.send(("#{k}="),v)}
     self.venue = venue
     @@all << self
+    venue.add_show(self)
   end
   
-  def venue= (venue)
-    @venue = venue
-    venue.add_show(self)
-  end 
-
-  #def self.create(show_hash, venue)
-  #  new_show = UCBShows::Show.new(show_hash, venue)
-  #end
-  
-  def self.new_from_hash(show_hash)
-    venueless_hash = show_hash.select {|k,v| k != :venue}
-	  venue = UCBShows::Venue.find_or_create_by_name(show_hash[:venue])
-	  self.new(venueless_hash, venue)
+  def self.new_from_hash(details_hash)
+    venue = UCBShows::Venue.find_or_create_by_name(details_hash[:venue])
+    show_hash = details_hash.select {|k,v| k != :venue}
+	  self.new(show_hash, venue)
   end
   
   def self.all
     @@all
   end
 
+end
 # commenting these out, will not be needed once Venue is up and running	
  #def self.all_franklin
  #  @@all.select{|show| show.venue=="UCB Franklin"}
@@ -46,8 +39,6 @@ class UCBShows::Show
  #def self.all_subculture
  #  @@all.select{|show| show.venue=="UCB Subculture"}
  #end 
-  
-end
 
 #@franklin_array.collect {|show| UCBShows::Show.new(show)} - this makes new shows!!!!
 #UCBShows::Show.all.each_with_index.map{|show, index| puts "#{index+1}. #{show.name} - #{show.time}"} - this works!
