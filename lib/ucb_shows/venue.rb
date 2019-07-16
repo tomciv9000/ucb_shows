@@ -34,14 +34,4 @@ class UCBShows::Venue
   end
   
   
-  # - this is a findable / createable set of methods that might be helpful later but aren't needed now
-  #def self.find_by_name(name)
-  #  self.all.detect {|venue| venue.name == name}
-  #end
-#
-  #def self.find_or_create_by_name(name)
-  #  find_by_name(name) || self.create(name)
-  #end
-  
-  
 end
