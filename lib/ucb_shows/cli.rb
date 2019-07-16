@@ -13,7 +13,7 @@ class UCBShows::CLI
   
   def list_theaters
     puts ""
-    puts "WHICH UCB THEATERS HAVE SHOWS TONIGHT?"
+    puts "WHAT'S PLAYING TONIGHT AT THE UPRIGHT CITIZENS BRIGADE?"
     puts ""
     venues = UCBShows::Venue.all
     venues.each_with_index{|venue, i| puts "#{i+1}. #{venue.name}"}
@@ -23,7 +23,7 @@ class UCBShows::CLI
     
     #this is me trying something, not tested------------------------------
     if input.to_i <= (venues.length) && != 0
-      show_listings(input)
+      print_showtimes(input.to_i - 1)
     #---------------------------------------------------------------------
     #if input == "1"
     #  franklin_menu
@@ -39,6 +39,16 @@ class UCBShows::CLI
       puts "WRONG! You can select a theater (1-4) or 'exit'."
     end
   end
+  
+  def print_showtimes(venue_index)
+    venue = UCBShows::Venue.all[venue_index]
+    puts "TONIGHT AT #{venue.name.upcase}:"
+    venue.shows.each_with_index do |show|
+      puts "(#{index+1}) #{show.time} - #{show.name}"
+    end
+  end
+  
+  
   
   def franklin_menu
       puts ""

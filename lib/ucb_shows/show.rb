@@ -8,8 +8,8 @@ class UCBShows::Show
   def initialize(show_hash, venue)
     show_hash.each  {|k, v| self.send(("#{k}="),v)}
     self.venue = venue
-    @@all << self
     venue.add_show(self)
+    @@all << self
   end
   
   def self.new_from_hash(details_hash)
@@ -23,6 +23,9 @@ class UCBShows::Show
   end
 
 end
+
+
+
 # commenting these out, will not be needed once Venue is up and running	
  #def self.all_franklin
  #  @@all.select{|show| show.venue=="UCB Franklin"}
