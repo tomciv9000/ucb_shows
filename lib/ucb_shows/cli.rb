@@ -49,7 +49,7 @@ class UCBShows::CLI
       start_menu
     elsif show_input == "exit"
       goodbye
-    elsif valid_choice?(show_input, venue.shows.length)
+    elsif valid_choice?(show_input, venue.shows.length) && show_input != "exit"
       show_selection = venue.shows[show_input.to_i - 1]
       print_details(show_selection)
       puts ""
