@@ -7,7 +7,7 @@ class UCBShows::CLI
   
   def start_menu
     puts ""
-    puts "TONIGHT AT THE UPRIGHT CITIZENS BRIGADE".red.on_white.bold
+    puts "TONIGHT AT THE UPRIGHT CITIZENS BRIGADE".red.bold
     puts ""
     venues = UCBShows::Venue.all
     venues.each_with_index{|venue, i| puts "#{i+1}. #{venue.name}"}
@@ -28,7 +28,7 @@ class UCBShows::CLI
   def print_showtimes(venue_index)
     venue = UCBShows::Venue.all[venue_index]
     puts ""
-    puts "TONIGHT AT #{venue.name.upcase}:".red.on_white.bold
+    puts "TONIGHT AT #{venue.name.upcase}:".magenta.bold
     venue.shows.each_with_index do |show, index|
       puts "#{index+1}. #{show.time} - #{show.name}"
     end
@@ -69,14 +69,14 @@ class UCBShows::CLI
 
   def print_details(show)
     puts ""
-    puts "#{show.name.upcase}".red.on_white.bold
+    puts "#{show.name.upcase}".green.bold
     puts "Location:           #{show.venue.name}"
     puts "Time:               #{show.time}"
     puts "Price:              #{show.price}"
     puts "Status:             #{show.status}"
     puts "Website:            #{show.show_url}"
     puts ""
-    puts "#{show.description}"
+    puts "#{show.description}".green
   end
   
   def goodbye
