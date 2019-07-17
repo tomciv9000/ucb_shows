@@ -55,7 +55,7 @@ class UCBShows::CLI
         puts ""
         print_showtimes(venue_index)
       elsif input == "n"
-        list_theaters
+        start_menu
       else
         puts ""
         puts "That was a yes or no question.  Let's try again.".red
