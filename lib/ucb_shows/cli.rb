@@ -14,7 +14,7 @@ class UCBShows::CLI
     puts ""
     puts "Enter (1 - #{venues.length}) to view that venue's showtimes or 'exit' to exit:".light_red.bold
     input = gets.strip.downcase
-    valid_choice?(input, venues.length)
+    if valid_choice?(input, venues.length)
       print_showtimes(input.to_i - 1)
     elsif input == "exit"
       goodbye  
@@ -40,12 +40,7 @@ class UCBShows::CLI
     puts ""
     puts "Enter (1 - #{venue.shows.length}) to view that show's details. 'menu' for main menu, or 'exit'.".light_red.bold
     show_input = gets.strip.downcase
-    if show_input == "menu"
-      start_menu
-    elsif show_input == "exit"
-      goodbye
-  #valid_move
-    elsif show_input.to_i > 0 && show_input.to_i <= venue.shows.length
+    if valid_choice?(show_input, venue.shows.length)
       show_selection = venue.shows[show_input.to_i - 1]
       print_details(show_selection)
       puts ""
@@ -61,6 +56,10 @@ class UCBShows::CLI
         puts "That was a yes or no question.  Let's try again.".light_red.bold
         print_showtimes(venue_index)
       end
+    elsif show_input == "menu"
+      start_menu
+    elsif show_input == "exit"
+      goodbye
     else
       puts ""
       puts "Let's try again. Enter (1 - #{venue.shows.length}), 'menu', or 'exit'.".light_red.bold
@@ -83,15 +82,7 @@ class UCBShows::CLI
   def valid_choice?(input, array_length)
     input.to_i > 0 && input.to_i <= array_length
   end
-  
-  
-   # delete below
-   elsif show_input.to_i > 0 && show_input.to_i <= venue.shows.length
-      show_selection = venue.shows[show_input.to_i - 1]
-  #delete above
-  
-  
-  
+
   
   def goodbye
     puts ""
