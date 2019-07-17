@@ -4,9 +4,10 @@ class UCBShows::Venue
   
   @@all = []
   
-  def initialize(name)
+  def initialize(name, url)
     @name = name
     @shows = []
+    @url = url
   end
 
   def shows
@@ -22,12 +23,12 @@ class UCBShows::Venue
     @@all << self
   end
   
-  def self.create(name)
-    venue = UCBShows::Venue.new(name)
-    venue.save
-    venue
-  end
-
+  #def self.create(name)
+  #  venue = UCBShows::Venue.new(name)
+  #  venue.save
+  #  venue
+  #end
+#
   def add_show(show)
     show.venue = self 
     @shows << show 
@@ -36,6 +37,12 @@ class UCBShows::Venue
   def shows 
     @shows
   end
+  
+  def self.make_ucb_venues
+    self.new("UCB Franklin - Los Angeles", "https://franklin.ucbtheatre.com")
+    self.new
+  end
+  #eventually shouldn't ever need to create a venue after scraping - just find_by_name
   
   def self.find_by_name(name)
     self.all.detect {|x| x.name == name}
