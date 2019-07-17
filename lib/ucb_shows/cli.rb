@@ -66,11 +66,6 @@ class UCBShows::CLI
       print_showtimes(venue_index)
     end
   end
-  
-  def goodbye
-    puts ""
-    puts "We're done here.".red
-  end
 
   def print_details(show)
     puts ""
@@ -82,6 +77,11 @@ class UCBShows::CLI
     puts "Website:            #{show.show_url}"
     puts ""
     puts "#{show.description}"
+  end
+  
+  def goodbye
+    puts ""
+    puts "We're done here.".red
   end
   
 end
