@@ -1,6 +1,6 @@
 # Upright Citizens Brigade Theater Shows
 
-This gem allows the user to see what shows are playing tonight at the Upright Citizens Brigade Theaters.  
+This Ruby gem provides a CLI to view the shows playing tonight at the Upright Citizens Brigade Theaters as per the UCBT venue websites.  
 
 ## Installation
 
@@ -20,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Type the below and follow the on screen prompts.
+
+    $ ucb-shows
 
 ## Development
 
