@@ -42,14 +42,14 @@ class UCBShows::CLI
     puts "Select a show (1 - #{venue.shows.length}) for details, 'menu', or 'exit'.".red
     show_input = gets.strip.downcase
     if show_input == "menu"
-      start
+      start_menu
     elsif show_input == "exit"
       goodbye
     elsif show_input.to_i > 0 && show_input.to_i <= venue.shows.length
       show_selection = venue.shows[show_input.to_i - 1]
       print_details(show_selection)
       puts ""
-      puts "Would you like to see details on another show at this venues? Enter Y or N".red
+      puts "Would you like to see details on another show at this venue? Enter Y or N".red
       input = gets.strip.downcase
       if input == "y"
         puts ""
@@ -71,7 +71,7 @@ class UCBShows::CLI
   
   def goodbye
     puts ""
-    puts "We're done here."
+    puts "We're done here.".red
   end
  
   
