@@ -7,7 +7,7 @@ class UCBShows::CLI
   
   def start_menu
     puts ""
-    puts "TONIGHT'S UCB SHOWS".red.on_white.bold
+    puts "TONIGHT AT THE UPRIGHT CITIZENS BRIGADE".red.on_white.bold
     puts ""
     venues = UCBShows::Venue.all
     venues.each_with_index{|venue, i| puts "#{i+1}. #{venue.name}"}
