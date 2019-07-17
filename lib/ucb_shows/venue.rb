@@ -12,7 +12,7 @@ class UCBShows::Venue
   end
 
   def shows
-    UCBShows::Scraper.scrape_index(self) if @shows.empty?
+    UCBShows::Scraper.scrape_venue(self) if @shows.empty?
     @shows
   end  
     
@@ -20,16 +20,6 @@ class UCBShows::Venue
     @@all
   end
   
-  #def save
-  #  @@all << self
-  #end
-  
-  #def self.create(name)
-  #  venue = UCBShows::Venue.new(name)
-  #  venue.save
-  #  venue
-  #end
-#
   def add_show(show)
     show.venue = self 
     @shows << show 
@@ -41,14 +31,10 @@ class UCBShows::Venue
     self.new("UCB Hell's Kitchen - NYC", "https://hellskitchen.ucbtheatre.com")
     self.new("UCB at SubCulture - NYC", "https://subculture.ucbtheatre.com")
   end
-  #eventually shouldn't ever need to create a venue after scraping - just find_by_name
   
   def self.find_by_name(name)
     self.all.detect {|x| x.name == name}
   end
 
-  #def self.find_or_create_by_name(name)
-  #  find_by_name(name) || self.create(name)
-  #end
   
 end
