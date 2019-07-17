@@ -1,9 +1,11 @@
 class UCBShows::Scraper
 #scrape per request / save as variable
- # @@ucb_venues_array = Array.new
+ 
+@@ucb_venues_array = Array.new
+
 # passing in theater and url to scrape_index(arg, arg)
+
   def self.scrape_venues
-    @ucb_venues_array = Array.new
     self.scrape_franklin_index
     self.scrape_sunset_index
     self.scrape_hk_index
@@ -26,7 +28,7 @@ class UCBShows::Scraper
        }
        @franklin_array << hash
      end
-     @ucb_venues_array << @franklin_array
+     @@ucb_venues_array << @franklin_array
   end
   
   def self.scrape_sunset_index
@@ -44,7 +46,7 @@ class UCBShows::Scraper
        }
        @sunset_array << hash
      end
-    @ucb_venues_array << @sunset_array
+    @@ucb_venues_array << @sunset_array
   end
   
   def self.scrape_hk_index
@@ -62,7 +64,7 @@ class UCBShows::Scraper
        }
      @hk_array << hash
     end
-   @ucb_venues_array << @hk_array
+   @@ucb_venues_array << @hk_array
   end
 
   def self.scrape_subculture_index
@@ -80,7 +82,7 @@ class UCBShows::Scraper
        }
      @subculture_array << hash
      end
-   @ucb_venues_array << @subculture_array
+   @@ucb_venues_array << @subculture_array
   end
   
   def self.make_shows
