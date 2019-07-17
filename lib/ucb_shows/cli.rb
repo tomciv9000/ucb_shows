@@ -1,6 +1,7 @@
 class UCBShows::CLI
   # add message to user 
   def call
+    UCBShows::Venue.make_ucb_venues
     UCBShows::Scraper.scrape_venues
     start_menu
   end
