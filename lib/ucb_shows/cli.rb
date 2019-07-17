@@ -69,13 +69,10 @@ class UCBShows::CLI
     end
   end
   
-  
   def goodbye
     puts ""
     puts "We're done here.".red
   end
- 
-  
 
   def print_details(show)
     puts ""
