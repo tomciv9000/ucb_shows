@@ -1,17 +1,9 @@
 class UCBShows::Scraper
 #scrape per request / save as variable
  
-@@ucb_venues_array = Array.new
+#@@ucb_venues_array = Array.new
 
 # passing in theater and url to scrape_index(arg, arg)
-
-  def self.scrape_venues
-    self.scrape_franklin_index
-    self.scrape_sunset_index
-    self.scrape_hk_index
-    self.scrape_subculture_index
-    self.make_shows
-  end
 
   def self.scrape_venue(venue)
     array_of_venue_show_details = []

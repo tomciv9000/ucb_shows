@@ -2,7 +2,6 @@ class UCBShows::CLI
   # add message to user 
   def call
     UCBShows::Venue.make_ucb_venues
-    UCBShows::Scraper.scrape_venues
     start_menu
   end
   
@@ -15,8 +14,7 @@ class UCBShows::CLI
     puts ""
     puts "Enter (1 - #{venues.length}) to view that venue's showtimes or 'exit' to exit:".light_red.bold
     input = gets.strip.downcase
-    #valid_move?
-    if input.to_i <= (venues.length) && input.to_i > 0
+    valid_choice?(input, venues.length)
       print_showtimes(input.to_i - 1)
     elsif input == "exit"
       goodbye  
@@ -81,6 +79,19 @@ class UCBShows::CLI
     puts ""
     puts "#{show.description}"
   end
+  
+  def valid_choice?(input, array_length)
+    input.to_i > 0 && input.to_i <= array_length
+  end
+  
+  
+   # delete below
+   elsif show_input.to_i > 0 && show_input.to_i <= venue.shows.length
+      show_selection = venue.shows[show_input.to_i - 1]
+  #delete above
+  
+  
+  
   
   def goodbye
     puts ""
