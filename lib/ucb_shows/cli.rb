@@ -25,7 +25,8 @@ class UCBShows::CLI
     elsif input == "exit"
       goodbye  
     else
-      puts "WRONG! You can select a theater by number or type 'exit'."
+      puts ""
+      puts "Let's try again. You can select a theater (1 - #{venues.length}) or type 'exit'."
       start
     end
   end
@@ -43,13 +44,13 @@ class UCBShows::CLI
   def venue_menu(venue_index)
     venue = UCBShows::Venue.all[venue_index]
     puts ""
-    puts "Select a show for details, 'menu' for the main menu, or 'exit'."
+    puts "Select a show (1 - #{venue.shows.length}) for details, 'menu' for the main menu, or 'exit'."
     show_input = gets.strip.downcase
     if show_input == "menu"
       start
     elsif show_input == "exit"
       goodbye
-    elsif show_input.to_i > 0 
+    elsif show_input.to_i > 0 && show_input.to_i <= venue.shows.length
       show_selection = venue.shows[show_input.to_i - 1]
       print_details(show_selection)
       puts ""
@@ -62,48 +63,33 @@ class UCBShows::CLI
         list_theaters
       else
         puts ""
-        puts "I have no idea what you are talking about."
-        print_showtimes(venue.index)
+        puts "That was a yes or no question.  Let's try again."
+        print_showtimes(venue_index)
       end
     else
       puts ""
-      puts "WRONG! You can select a show, return to the main 'menu', or 'exit'."
-      venue_menu(venue_index)
+      puts "Let's try again. You can select a show (1 - #{venue.shows.length}), 'menu', or 'exit'."
+      print_showtimes(venue_index)
     end
   end
   
   
   def goodbye
     puts ""
-    puts "Bye-BYEEEEE!!!"
+    puts "We're done here."
   end
  
   
-## - maybe need this empty array message thing if shows are showing up empty.  
- #def print_subculture 
- #  puts ""
- #  if UCBShows::Show.all_subculture.empty?
- #    puts "No shows!!! Bang on the keyboard, then press enter to return to main menu."
- #    input = gets.strip
- #    start
- #  else
- #    UCBShows::Show.all_subculture.each_with_index do |show, index| 
- #      puts "(#{index+1}) #{show.time} - #{show.name}"
- #    end
- #  end
- #end
-  
+
   def print_details(show)
     puts ""
-    puts "----------- #{show.name} -----------"
+    puts " #{show.name.upcase}"
     puts ""
     puts "Location:           #{show.venue.name}"
     puts "Time:               #{show.time}"
     puts "Price:              #{show.price}"
     puts "Status:             #{show.status}"
     puts "Website:            #{show.show_url}"
-    puts ""
-    puts "---------------Description--------------"
     puts ""
     puts "#{show.description}"
     puts ""
