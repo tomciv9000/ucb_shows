@@ -1,6 +1,6 @@
 class UCBShows::Venue 
   
-  attr_accessor :name, :shows
+  attr_accessor :name, :url
   
   @@all = []
   
@@ -9,6 +9,11 @@ class UCBShows::Venue
     @shows = []
   end
 
+  def shows
+    UCBShows::Scraper.scrape_index(self) if @shows.empty?
+    @shows
+  end  
+    
   def self.all
     @@all
   end
