@@ -27,11 +27,14 @@ class UCBShows::CLI
   
   def print_showtimes(venue_index)
     venue = UCBShows::Venue.all[venue_index]
-    puts ""
-    puts "TONIGHT AT #{venue.name.upcase}:".yellow.on_cyan.bold
-    venue.shows.each_with_index do |show, index|
-      puts "#{index+1}. #{show.time} - #{show.name}"
-    end
+    if venue.shows.empty?
+      puts "There are no shows at #{venue.name} this evening.".yellow.on_cyan.bold
+    else
+      puts ""
+      puts "TONIGHT AT #{venue.name.upcase}:".yellow.on_cyan.bold
+      venue.shows.each_with_index do |show, index|
+        puts "#{index+1}. #{show.time} - #{show.name}"
+      end
     venue_menu(venue_index)
   end
   
