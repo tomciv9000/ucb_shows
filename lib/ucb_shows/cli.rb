@@ -1,5 +1,3 @@
-#My CLI Controller
-
 class UCBShows::CLI
   
   def call
