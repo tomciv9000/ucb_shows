@@ -20,7 +20,6 @@ class UCBShows::Scraper
     
   def self.make_shows(show_details)
       show_details.collect {|show| UCBShows::Show.new_from_hash(show)}
-    end
   end  
 
   

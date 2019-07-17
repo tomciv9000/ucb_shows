@@ -35,6 +35,7 @@ class UCBShows::CLI
       venue.shows.each_with_index do |show, index|
         puts "#{index+1}. #{show.time} - #{show.name}"
       end
+    end
     venue_menu(venue_index)
   end
   
