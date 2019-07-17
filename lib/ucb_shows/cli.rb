@@ -4,21 +4,16 @@ class UCBShows::CLI
   
   def call
     UCBShows::Scraper.scrape_venues
-    start
+    start_menu
   end
   
-  def start
-    list_theaters
-  end
-  
-  def list_theaters
+  def start_menu
     puts ""
-    puts "WHAT'S PLAYING TONIGHT AT THE UPRIGHT CITIZENS BRIGADE?"
-    puts ""
+    puts "TONIGHT'S UCB SHOWS".red.on_white.bold
     venues = UCBShows::Venue.all
     venues.each_with_index{|venue, i| puts "#{i+1}. #{venue.name}"}
     puts ""
-    puts "Select a theater (1 - #{venues.length}) for listings or 'exit' to exit:"
+    puts "Select a theater (1 - #{venues.length}) for listings or 'exit' to exit:".red
     input = gets.strip.downcase
     if input.to_i <= (venues.length) && input.to_i != 0
       print_showtimes(input.to_i - 1)
@@ -26,7 +21,7 @@ class UCBShows::CLI
       goodbye  
     else
       puts ""
-      puts "Let's try again. You can select a theater (1 - #{venues.length}) or type 'exit'."
+      puts "Let's try again. You can select a theater (1 - #{venues.length}) or type 'exit'.".red
       start
     end
   end
@@ -34,9 +29,9 @@ class UCBShows::CLI
   def print_showtimes(venue_index)
     venue = UCBShows::Venue.all[venue_index]
     puts ""
-    puts "TONIGHT AT #{venue.name.upcase}:"
+    puts "TONIGHT AT #{venue.name.upcase}:".red.on_white.bold
     venue.shows.each_with_index do |show, index|
-      puts "(#{index+1}) #{show.time} - #{show.name}"
+      puts "#{index+1}. #{show.time} - #{show.name}"
     end
     venue_menu(venue_index)
   end
@@ -44,7 +39,7 @@ class UCBShows::CLI
   def venue_menu(venue_index)
     venue = UCBShows::Venue.all[venue_index]
     puts ""
-    puts "Select a show (1 - #{venue.shows.length}) for details, 'menu' for the main menu, or 'exit'."
+    puts "Select a show (1 - #{venue.shows.length}) for details, 'menu', or 'exit'.".red
     show_input = gets.strip.downcase
     if show_input == "menu"
       start
@@ -54,7 +49,7 @@ class UCBShows::CLI
       show_selection = venue.shows[show_input.to_i - 1]
       print_details(show_selection)
       puts ""
-      puts "Would you like to see details on another show at this venues? Enter Y or N"
+      puts "Would you like to see details on another show at this venues? Enter Y or N".red
       input = gets.strip.downcase
       if input == "y"
         puts ""
@@ -63,12 +58,12 @@ class UCBShows::CLI
         list_theaters
       else
         puts ""
-        puts "That was a yes or no question.  Let's try again."
+        puts "That was a yes or no question.  Let's try again.".red
         print_showtimes(venue_index)
       end
     else
       puts ""
-      puts "Let's try again. You can select a show (1 - #{venue.shows.length}), 'menu', or 'exit'."
+      puts "Let's try again. You can select a show (1 - #{venue.shows.length}), 'menu', or 'exit'.".red
       print_showtimes(venue_index)
     end
   end
@@ -83,8 +78,7 @@ class UCBShows::CLI
 
   def print_details(show)
     puts ""
-    puts " #{show.name.upcase}"
-    puts ""
+    puts "#{show.name.upcase}".red.on_white.bold
     puts "Location:           #{show.venue.name}"
     puts "Time:               #{show.time}"
     puts "Price:              #{show.price}"
@@ -92,7 +86,6 @@ class UCBShows::CLI
     puts "Website:            #{show.show_url}"
     puts ""
     puts "#{show.description}"
-    puts ""
   end
   
 end
