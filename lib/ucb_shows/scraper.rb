@@ -1,9 +1,5 @@
 class UCBShows::Scraper
 
-  #def initialize
-  #  @ucb_venues_array = Array.new
-  #end
-  
   def self.scrape_venues
     @ucb_venues_array = Array.new
     self.scrape_franklin_index

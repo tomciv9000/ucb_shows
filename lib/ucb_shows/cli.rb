@@ -1,4 +1,4 @@
-# My CLI Controller
+#My CLI Controller
 
 class UCBShows::CLI
   
@@ -10,10 +10,11 @@ class UCBShows::CLI
   def start_menu
     puts ""
     puts "TONIGHT'S UCB SHOWS".red.on_white.bold
+    puts ""
     venues = UCBShows::Venue.all
     venues.each_with_index{|venue, i| puts "#{i+1}. #{venue.name}"}
     puts ""
-    puts "Select a theater (1 - #{venues.length}) for listings or 'exit' to exit:".red
+    puts "Enter (1 - #{venues.length}) to view that venue's showtimes or 'exit' to exit:".red
     input = gets.strip.downcase
     if input.to_i <= (venues.length) && input.to_i != 0
       print_showtimes(input.to_i - 1)
@@ -21,8 +22,8 @@ class UCBShows::CLI
       goodbye  
     else
       puts ""
-      puts "Let's try again. You can select a theater (1 - #{venues.length}) or type 'exit'.".red
-      start
+      puts "Let's try again. Enter (1 - #{venues.length}) for showtimes or 'exit'.".red
+      start_menu
     end
   end
   
@@ -39,7 +40,7 @@ class UCBShows::CLI
   def venue_menu(venue_index)
     venue = UCBShows::Venue.all[venue_index]
     puts ""
-    puts "Select a show (1 - #{venue.shows.length}) for details, 'menu', or 'exit'.".red
+    puts "Enter (1 - #{venue.shows.length}) to view that show's details. 'menu' for main menu, or 'exit'.".red
     show_input = gets.strip.downcase
     if show_input == "menu"
       start_menu
@@ -49,7 +50,7 @@ class UCBShows::CLI
       show_selection = venue.shows[show_input.to_i - 1]
       print_details(show_selection)
       puts ""
-      puts "Would you like to see details on another show at this venue? Enter Y or N".red
+      puts "Would you like to see details for another show at #{venue.name}? 'Y' or 'N'?".red
       input = gets.strip.downcase
       if input == "y"
         puts ""
@@ -63,7 +64,7 @@ class UCBShows::CLI
       end
     else
       puts ""
-      puts "Let's try again. You can select a show (1 - #{venue.shows.length}), 'menu', or 'exit'.".red
+      puts "Let's try again. Enter (1 - #{venue.shows.length}), 'menu', or 'exit'.".red
       print_showtimes(venue_index)
     end
   end
