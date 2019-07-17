@@ -1,7 +1,6 @@
 class UCBShows::Show 
   
-  attr_accessor :name, :time, :description, :price, :status, :show_url
-  attr_reader :venue
+  attr_accessor :name, :time, :description, :price, :status, :show_url, :venue
 	
   @@all = []
   

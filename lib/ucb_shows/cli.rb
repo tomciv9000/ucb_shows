@@ -20,7 +20,7 @@ class UCBShows::CLI
     puts ""
     puts "Select a theater (1 - #{venues.length}) for listings or 'exit' to exit:"
     input = gets.strip.downcase
-    if input.to_i <= (venues.length) && != 0
+    if input.to_i <= (venues.length) && input.to_i != 0
       print_showtimes(input.to_i - 1)
     elsif input == "exit"
       goodbye  
@@ -32,8 +32,9 @@ class UCBShows::CLI
   
   def print_showtimes(venue_index)
     venue = UCBShows::Venue.all[venue_index]
+    puts ""
     puts "TONIGHT AT #{venue.name.upcase}:"
-    venue.shows.each_with_index do |show|
+    venue.shows.each_with_index do |show, index|
       puts "(#{index+1}) #{show.time} - #{show.name}"
     end
     venue_menu(venue_index)
@@ -44,7 +45,7 @@ class UCBShows::CLI
     puts ""
     puts "Select a show for details, 'menu' for the main menu, or 'exit'."
     show_input = gets.strip.downcase
-    if show_input.to_i <= (venue.shows.length) && != 0
+    if show_input.to_i <= (venue.shows.length) && show_input != 0
       show_selection = venue.shows[show_input.to_i - 1]
       print_details(show_selection)
       puts ""
@@ -52,7 +53,7 @@ class UCBShows::CLI
       input = gets.strip.downcase
       if input == "y"
         puts ""
-        print_showtimes(venue.index)
+        print_showtimes(venue_index)
       elsif input == "n"
         list_theaters
       else

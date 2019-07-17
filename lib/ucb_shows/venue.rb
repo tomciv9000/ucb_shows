@@ -1,5 +1,5 @@
 class UCBShows::Venue 
-
+  
   attr_accessor :name, :shows
   
   @@all = []
@@ -23,7 +23,6 @@ class UCBShows::Venue
     venue
   end
 
-  
   def add_show(show)
     show.venue = self 
     @shows << show 
@@ -33,5 +32,12 @@ class UCBShows::Venue
     @shows
   end
   
+  def self.find_by_name(name)
+    self.all.detect {|x| x.name == name}
+  end
+
+  def self.find_or_create_by_name(name)
+    find_by_name(name) || self.create(name)
+  end
   
 end
