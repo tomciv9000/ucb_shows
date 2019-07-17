@@ -45,7 +45,11 @@ class UCBShows::CLI
     puts ""
     puts "Enter (1 - #{venue.shows.length}) to view that show's details. 'menu' for main menu, or 'exit'.".light_red.bold
     show_input = gets.strip.downcase
-    if valid_choice?(show_input, venue.shows.length)
+    if show_input == "menu"
+      start_menu
+    elsif show_input == "exit"
+      goodbye
+    elsif valid_choice?(show_input, venue.shows.length)
       show_selection = venue.shows[show_input.to_i - 1]
       print_details(show_selection)
       puts ""
@@ -61,11 +65,6 @@ class UCBShows::CLI
         puts "That was a yes or no question.  Let's try again.".light_red.bold
         print_showtimes(venue_index)
       end
-    end
-    if show_input == "menu"
-      start_menu
-    elsif show_input == "exit"
-      goodbye
     else
       puts ""
       puts "Let's try again. Enter (1 - #{venue.shows.length}), 'menu', or 'exit'.".light_red.bold
