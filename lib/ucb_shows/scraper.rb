@@ -11,7 +11,7 @@ class UCBShows::Scraper
          description: show.css("p").text,
          price: show.css("a.btn strong").text,
          status: show.css("a.btn").text.split(/\s*-\s*/)[1],
-         show_url: "#{venue.url}/#{show.css("a").attribute("href").text}"
+         show_url: "#{venue.url}#{show.css("a").attribute("href").text}"
        }
        array_of_venue_show_details << hash
      end
