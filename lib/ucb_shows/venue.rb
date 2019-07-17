@@ -35,10 +35,6 @@ class UCBShows::Venue
     @shows << show 
   end
   
-  def shows 
-    @shows
-  end
-  
   def self.make_ucb_venues
     self.new("UCB Franklin - LA", "https://franklin.ucbtheatre.com")
     self.new("UCB Sunset - LA", "https://sunset.ucbtheatre.com")
