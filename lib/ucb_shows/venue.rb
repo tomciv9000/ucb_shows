@@ -8,6 +8,7 @@ class UCBShows::Venue
     @name = name
     @shows = []
     @url = url
+    @@all << self
   end
 
   def shows
@@ -19,9 +20,9 @@ class UCBShows::Venue
     @@all
   end
   
-  def save
-    @@all << self
-  end
+  #def save
+  #  @@all << self
+  #end
   
   #def self.create(name)
   #  venue = UCBShows::Venue.new(name)
@@ -48,8 +49,8 @@ class UCBShows::Venue
     self.all.detect {|x| x.name == name}
   end
 
-  def self.find_or_create_by_name(name)
-    find_by_name(name) || self.create(name)
-  end
+  #def self.find_or_create_by_name(name)
+  #  find_by_name(name) || self.create(name)
+  #end
   
 end
