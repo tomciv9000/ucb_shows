@@ -7,7 +7,7 @@ class UCBShows::CLI
 
   def start_menu
     puts ""
-    puts "TONIGHT AT THE UPRIGHT CITIZENS BRIGADE".white.on_cyan.bold
+    puts "TONIGHT AT THE UPRIGHT CITIZENS BRIGADE".white.on_red.bold
     puts ""
     venues = UCBShows::Venue.all
     venues.each_with_index{|venue, i| puts "#{i+1}. #{venue.name}"}
@@ -28,7 +28,7 @@ class UCBShows::CLI
   def print_showtimes(venue_index)
     venue = UCBShows::Venue.all[venue_index]
     if venue.shows.empty?
-      puts "There are no shows at #{venue.name} tonight.".white.on_red.bold
+      puts "There are no shows at #{venue.name} tonight.".yellow.bold
       start_menu
     else
       puts ""
@@ -74,7 +74,7 @@ class UCBShows::CLI
 
   def print_details(show)
     puts ""
-    puts "#{show.name.upcase}".cyan.on_magenta.bold
+    puts "#{show.name}".white.on_magenta.bold
     puts "Location:           #{show.venue.name}"
     puts "Time:               #{show.time}"
     puts "Price:              #{show.price}"
