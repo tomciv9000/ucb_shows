@@ -7,17 +7,17 @@ class UCBShows::CLI
   
   def start_menu
     puts ""
-    puts "TONIGHT AT THE UPRIGHT CITIZENS BRIGADE".light_red.on_cyan.bold
+    puts "TONIGHT AT THE UPRIGHT CITIZENS BRIGADE".yellow.on_cyan.bold
     puts ""
     venues = UCBShows::Venue.all
     venues.each_with_index{|venue, i| puts "#{i+1}. #{venue.name}"}
     puts ""
     puts "Enter (1 - #{venues.length}) to view that venue's showtimes or 'exit' to exit:".light_red.bold
     input = gets.strip.downcase
-    if valid_choice?(input, venues.length)
+    if input == "exit"
+      goodbye
+    elsif valid_choice?(input, venues.length) && input != "exit"
       print_showtimes(input.to_i - 1)
-    elsif input == "exit"
-      goodbye  
     else
       puts ""
       puts "Let's try again. Enter (1 - #{venues.length}) for showtimes or 'exit'.".light_red.bold
@@ -32,12 +32,12 @@ class UCBShows::CLI
       start_menu
     else
       puts ""
-      puts "TONIGHT AT #{venue.name.upcase}:".yellow.on_cyan.bold
+      puts "TONIGHT AT #{venue.name.upcase}:".cyan.on_magenta.bold
       venue.shows.each_with_index do |show, index|
         puts "#{index+1}. #{show.time} - #{show.name}"
       end
+      venue_menu(venue_index)
     end
-    venue_menu(venue_index)
   end
   
   def venue_menu(venue_index)
