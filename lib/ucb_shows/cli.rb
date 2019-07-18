@@ -1,13 +1,13 @@
 class UCBShows::CLI
-  # add message to user 
+  # add message to user
   def call
     UCBShows::Venue.make_ucb_venues
     start_menu
   end
-  
+
   def start_menu
     puts ""
-    puts "TONIGHT AT THE UPRIGHT CITIZENS BRIGADE".yellow.on_cyan.bold
+    puts "TONIGHT AT THE UPRIGHT CITIZENS BRIGADE".white.on_cyan.bold
     puts ""
     venues = UCBShows::Venue.all
     venues.each_with_index{|venue, i| puts "#{i+1}. #{venue.name}"}
@@ -24,7 +24,7 @@ class UCBShows::CLI
       start_menu
     end
   end
-  
+
   def print_showtimes(venue_index)
     venue = UCBShows::Venue.all[venue_index]
     if venue.shows.empty?
@@ -32,14 +32,14 @@ class UCBShows::CLI
       start_menu
     else
       puts ""
-      puts "TONIGHT AT #{venue.name.upcase}".cyan.on_magenta.bold
+      puts "TONIGHT AT #{venue.name.upcase}".white.on_cyan.bold
       venue.shows.each_with_index do |show, index|
         puts "#{index+1}. #{show.time} - #{show.name}"
       end
       venue_menu(venue_index)
     end
   end
-  
+
   def venue_menu(venue_index)
     venue = UCBShows::Venue.all[venue_index]
     puts ""
@@ -74,7 +74,7 @@ class UCBShows::CLI
 
   def print_details(show)
     puts ""
-    puts "#{show.name.upcase}".white.on_cyan.bold
+    puts "#{show.name.upcase}".cyan.on_magenta.bold
     puts "Location:           #{show.venue.name}"
     puts "Time:               #{show.time}"
     puts "Price:              #{show.price}"
@@ -83,15 +83,15 @@ class UCBShows::CLI
     puts ""
     puts "#{show.description}"
   end
-  
+
   def valid_choice?(input, array_length)
     input.to_i > 0 && input.to_i <= array_length
   end
 
-  
+
   def goodbye
     puts ""
     puts "We're done here.".light_red.bold
   end
-  
+
 end
