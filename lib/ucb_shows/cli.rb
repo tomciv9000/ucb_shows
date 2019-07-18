@@ -16,7 +16,7 @@ class UCBShows::CLI
     input = gets.strip.downcase
     if input == "exit"
       goodbye
-    elsif valid_choice?(input, venues.length) && input != "exit"
+    elsif valid_choice?(input, venues.length)
       print_showtimes(input.to_i - 1)
     else
       puts ""
@@ -49,7 +49,7 @@ class UCBShows::CLI
       start_menu
     elsif show_input == "exit"
       goodbye
-    elsif valid_choice?(show_input, venue.shows.length) && show_input != "exit"
+    elsif valid_choice?(show_input, venue.shows.length)
       show_selection = venue.shows[show_input.to_i - 1]
       print_details(show_selection)
       puts ""
