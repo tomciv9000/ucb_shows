@@ -1,7 +1,7 @@
 class UCBShows::Scraper
 
   def self.scrape_venue(venue)
-    array_of_venue_show_details = []
+    show_details_array = []
     doc = Nokogiri::HTML(open(venue.url))
      doc.css("div.col-xs-9").collect do |show|
        hash = {
@@ -13,14 +13,14 @@ class UCBShows::Scraper
          status: show.css("a.btn").text.split(/\s*-\s*/)[1],
          show_url: "#{venue.url}#{show.css("a").attribute("href").text}"
        }
-       array_of_venue_show_details << hash
+       show_details_array << hash
      end
-    self.make_shows(array_of_venue_show_details)
+    self.make_shows(show_details_array)
   end
-    
+
   def self.make_shows(show_details)
       show_details.collect {|show| UCBShows::Show.new_from_hash(show)}
-  end  
+  end
 
-  
+
 end
