@@ -1,5 +1,5 @@
 class UCBShows::CLI
-  
+
   def call
     UCBShows::Venue.make_ucb_venues
     start_menu
@@ -85,9 +85,8 @@ class UCBShows::CLI
   end
 
   def valid_choice?(input, array_length)
-    input.to_i > 0 && input.to_i <= array_length
+    input.to_i.between?(1, array_length)
   end
-
 
   def goodbye
     puts ""
