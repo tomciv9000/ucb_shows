@@ -6,7 +6,7 @@ This Ruby gem provides a CLI to view the shows playing tonight at the Upright Ci
 
 Add this line to your application's Gemfile:
 
-```ruby
+```
 gem 'ucb_shows'
 ```
 
