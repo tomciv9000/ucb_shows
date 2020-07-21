@@ -28,7 +28,7 @@ class UCBShows::CLI
   def print_showtimes(venue_index)
     venue = UCBShows::Venue.all[venue_index]
     if venue.shows.empty?
-      puts "There are no shows at #{venue.name} tonight.".yellow.bold
+      puts "There are no shows at #{venue.name} indefinitely".yellow.bold
       start_menu
     else
       puts ""
