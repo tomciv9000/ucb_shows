@@ -25,6 +25,7 @@ class UCBShows::Venue
   end
 
   def self.make_ucb_venues
+    ## Theater currently in flux, these are no longer accurate
     self.new("UCB Franklin - LA", "https://franklin.ucbtheatre.com")
     self.new("UCB Sunset - LA", "https://sunset.ucbtheatre.com")
     self.new("UCB Hell's Kitchen - NYC", "https://hellskitchen.ucbtheatre.com")
